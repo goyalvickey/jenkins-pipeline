@@ -1,5 +1,6 @@
 def CONTAINER_NAME="jenkins-pipeline"
 def CONTAINER_TAG="latest"
+def CONTAINER_TAG1="${env.BUILD_NUMBER}"
 def DOCKER_HUB_USER="pkw0301"
 def HTTP_PORT="8090"
 
@@ -37,7 +38,7 @@ node {
 
     stage('Push to Docker Registry'){
         withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-            pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+            pushToImage(CONTAINER_NAME, CONTAINER_TAG1, USERNAME, PASSWORD)
         }
     }
 
